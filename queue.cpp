@@ -20,6 +20,7 @@ void makeInput()
     // n2=rand
     // make(c,d,n2)
     // print X1,X2
+    cout<<"making input";
     return;
 }
 
