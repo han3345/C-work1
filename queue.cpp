@@ -4,14 +4,15 @@
 //输出a+b=？
 //**仅限整数次幂！**
 #include<iostream>
+#include<ctime>
+#include<cstdio>
 using namespace std;
 
 
-long double a[10000];//系数
-long long b[10000];//指数
-long double c[10000];//系数
-long long d[10000];//指数
-int n;
+long double a[100];//系数
+long long b[100]={0,1,22,333,4444,55555,666666,7777777,88888888,999999999};//指数
+long double c[100];//系数
+long long d[100]={0,9,88,777,6666,55555,444444,3333333,22222222,111111111};//指数
 
 void makeInput()
 {
@@ -20,7 +21,11 @@ void makeInput()
     // n2=rand
     // make(c,d,n2)
     // print X1,X2
-    cout<<"making input";
+    srand((unsigned)time(NULL));
+    for(int i=1;i<=9;++i){
+        a[i]=rand()%997;// a prime number
+        c[i]=rand()%997;// a prime number
+    }
     return;
 }
 
@@ -28,7 +33,35 @@ void makeInput()
 void add()
 {
     //new queue;
-
+    long long x[100]={0},y[100]={0};
+    int s=0;
+    int i=1,j=1;
+    while(i<=9&&j<=9){
+        if(b[i]<d[j]){
+            x[++s]=b[i];
+            y[s]=a[i];
+            i++;
+        }else if(b[i]>d[j]){
+            x[++s]=d[j];
+            y[s]=c[j];
+            j++;
+        }else{
+            x[++s]=b[i];
+            y[s]=a[i]+c[j];
+            i++;
+            j++;
+        }
+    }
+    for(i;i<=9;++i){
+        x[++s]=b[i];
+        y[s]=a[i];
+    }
+    for(j;j<=9;++j){
+        x[++s]=d[j];
+        y[s]=c[j];
+    }
+    for(int i=1;i<=s;++i)
+        cout<<y[i]<<"X^"<<x[i]<<"+"<<endl;
     return;
 }
 
